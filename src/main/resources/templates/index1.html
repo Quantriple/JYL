@@ -1,0 +1,102 @@
+<html>
+<head>
+    <title>导入用户</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8"  name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  type="text/javascript" src="http://47.99.220.129:80/jquery.js" ></script>
+    <script  type="text/javascript" src="http://47.99.220.129:80/upload.js" ></script>
+    <style type="text/css">
+        input {
+            border:1px solid;
+            outline:none;
+            line-height:normal;
+            *overflow:visible
+        }
+
+        .inpo{
+            margin-top: 20px;
+        }
+
+
+        .divBig{
+            height: 40px;
+            text-align: center;
+            margin-top:5%;
+            margin-bottom: 5%;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        function checkExcel(){
+            //alert("1");
+            var excelName = $("#file").val();
+            var fileTArr=excelName.split(".");
+            //切割出后缀文件名
+            var filetype=fileTArr[fileTArr.length-1];
+            if(filetype!=null && filetype!=""){
+                if(filetype == "xls" ){
+                    $.ajaxFileUpload({
+                        url: "http://127.0.0.1:8080/upload",
+                        type: 'post',
+                        secureuri: false,
+                        data:{
+
+                        },
+                        fileElementId: 'file',
+                        dataType: 'json',
+                        success: function(rel, status){
+                            console.log("rel.result "+rel.result);
+                            if(rel.result=='success'){
+                              alert('成功');
+                            }else if(rel.result=='fail'){
+                                $.messager.alert('失败');
+                            }
+                        },
+                        error: function(data, status, e){
+                            alert('与服务器通讯失败，请稍后再试！');
+
+                        }
+                    });
+                }else{
+                    alert('请上传正确的Excel文件，只能上传后缀为xls的Excel文件');
+                }
+            }else{
+                alert('请上传excel（后缀为xls）文件！');
+            }
+        }
+
+
+    </script>
+
+</head>
+<body>
+<form id="inputForm" action="http://127.0.0.1:8080/upload" method="post" enctype="multipart/form-data">
+    <div style="margin-top: 20px;">
+        <table width="80%" class="list" border="0" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td width="30%" style="text-align:left;" bgcolor="#fafcfd"><span style="color: red;" >*</span><span id="uploadFile">上传文件：</span></td>
+                <td width="70%"><input type="file" name="file" id="file" value="" style="width:100%;height:22px;" /></td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="margin-top: 10px;margin-left: 20px;">
+				<span id="fileconFrom"><strong>上传文件内容格式说明：</strong><br/>
+						1.导入文件应为Office Excel文件；<br>
+						2.导入文件暂不支持Office 2007及以后版本的Excel文件，如您使用的是Office 2007及以后版本，请把Excel文件转换为2003或之前的版本格式，具体转换方式为：打开的Excel文件中，选择“另存为”->“Excel 97-2003工作簿”；<br>
+						3.进行导入操作时，请确保您导入的文件并未处于使用状态。
+				</span>
+        <br>
+    </div>
+
+
+
+    <div class="divBig">
+        <button id="btn_import"  onclick="checkExcel();" class="btn btn-warning" type="button" style="margin:auto 0;">确认导入</button>
+    </div>
+
+</form>
+</body>
+</html>

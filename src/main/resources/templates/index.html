@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用</title>
+</head>
+<style type="text/css">
+.text-file {
+filter:alpha(opacity:0);
+opacity: 0;
+width:260px
+}
+</style>
+<script type="text/javascript">
+     function upLoadFile(){
+        alert("进入");
+        $.ajaxFileUpload({
+            url: "http://127.0.0.1:8080/upload",  //用于文件上传的服务器端请求地址
+            secureuri: false,                                //一般设置为false
+            fileElementId: "upload",            //文件上传空间的id属性  <input type="file" id="file" name="file" />
+            dataType: "json",
+        });
+    }
+</script>
+<!--测试环境放地址正式环境去除-->
+<script  src="http://47.99.220.129:80/jquery.js" async="async"></script>
+<script  src="http://47.99.220.129:80/ajaxfileupload.js" async="async"></script>
+<!--<link href="/style.css" rel="stylesheet" type="text/css" />-->
+<script type="text/javascript">
+
+
+
+
+</script>
+<body>
+<form action="" name="" method="post" enctype="multipart/form-data" >
+    <input type="file" name="upload" id="upload" style="height: 30px;width: 70px;" onchange="upLoadFile();" >
+<!--
+    <input type="button" class="btn btn-info btn-primary btn-sm CanUpd botton-box-zsgc" style="margin-top:-53px;height: 30px;width: 70px;" value="批量导入">
+-->
+</form>
+</body>
+</html>

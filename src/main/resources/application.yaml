@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+
+#spring
+
+
+#the fist datasource mysql test
+mysql:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://47.99.220.129:3306/mysql?useUnicode=true&characterEncoding=utf8
+  userName: root
+  passWord: root1234
+
+#the second datasource
+dataSource1:
+  driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:mysql://47.99.220.129:3306/mysql?useUnicode=true&characterEncoding=utf8
+  username: root
+  password: root1234
+  max-active: 15
+  initial-size: 3
+  filters: stat
+  maxWait: 60000
+  minIdle: 1
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: select 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxOpenPreparedStatements: 20
+#mybits
+mybatis1:
+  #config-location: classpath:
+  mapper-locations: classpath*:sqlmapper/*.xml
+  #config-location: classpath:mybatis-config.xml
+  type-aliases-package: com.Qqq.entity
+
+
+#sl4j
+logging:
+  config: classpath:logback-spring.xml
+ # path: d:/
+
+
+#logging:
+ # config: classpath:logback-boot.xml
+
+
+
+
+
+
